@@ -1,0 +1,16 @@
+#: import MapView kivy_garden.mapview.MapView
+#: import GpsBlinker gpsblinker.GpsBlinker
+#: include gpsblinker.kv
+<TennisMapView>:
+    lat: 37.7159
+    lon: -121.9101
+    zoom: 10
+    on_zoom:
+        self.zoom = 10 if self.zoom < 10 else self.zoom
+    on_lat:
+        self.start_getting_tcs_in_fov()
+    on_lon:
+        self.start_getting_tcs_in_fov()
+    GpsBlinker:
+        id: blinker
+
