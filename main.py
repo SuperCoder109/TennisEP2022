@@ -17,7 +17,7 @@ class MainApp(MDApp):
         self.connection = sqlite3.connect("TennisCourts.db")
         self.cursor = self.connection.cursor()
 
-        print()
+
 
         # Instantiate SearchPopupMenu
 
