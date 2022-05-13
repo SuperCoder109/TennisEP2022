@@ -1,5 +1,7 @@
 from kivy.app import App
 from kivy.utils import platform
+from kivy_garden.mapview import MapView
+from tennismarker import TennisMarker
 from kivymd.uix.dialog import MDDialog
 
 
@@ -30,7 +32,7 @@ class GpsHelper():
             gps.start(minTime=1000, minDistance=0)
 
 
-    def update_blinker_position(self, *args, **kwargs):
+    def update_blinker_position(self, tc, *args, **kwargs):
         my_lat = kwargs['lat']
         my_lon = kwargs['lon']
 
@@ -39,6 +41,16 @@ class GpsHelper():
         gps_blinker = App.get_running_app().root.ids.mapview.ids.blinker
         gps_blinker.lat = my_lat
         gps_blinker.lon = my_lon
+        #Change Court Occupation status
+        lat, lon = tc[1], tc[2]
+        occupation = tc[3]
+        source = ''
+        marker = TennisMarker(lat=lat, lon=lon, occupation=occupation, source=source)
+        marker.tc_data = tc
+        if ((my_lat <= (lat + 0.000164)) or (my_lat >= (lat - 0.000164))) and ((my_lon <= (lon + 0.000108)) or (my_lon >= (lon - 0.000108))):
+            occupation = "yes"
+            source = 'ClosedMarker.png'
+
 
         #Center map on gps
         if not self.has_centered_app:
