@@ -56,7 +56,7 @@ class GpsHelper():
             map.center_on(my_lat, my_lon)
             self.has_centered_map = True
 
-
+#In Progress
     '''def change_occupation_status(self, tc, **kwargs):
         my_lat = kwargs['lat']
         my_lon = kwargs['lon']
