@@ -8,8 +8,9 @@ from kivymd.uix.dialog import MDDialog
 
 class GpsHelper():
     has_centered_map = False
+
     def run(self):
-        tmv = TennisMapView()
+
         #Reference GpsBlinker
         gps_blinker = App.get_running_app().root.ids.mapview.ids.blinker
         gps_blinker.blink()
@@ -28,7 +29,9 @@ class GpsHelper():
         #Configure GPS
         if platform == 'android' or platform == "ios":
             from plyer import gps
-            for tc in tmv.tcs():
+            tmv = TennisMapView()
+            tlst = tmv.tcs
+            for tc in tlst:
                 tennisc = tc
             gps.configure(on_location=self.update_blinker_position(),
                           on_status=self.on_auth_status,
