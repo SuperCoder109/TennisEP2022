@@ -19,7 +19,5 @@ class MainApp(MDApp):
 
 
 
-        # Instantiate SearchPopupMenu
-
 MainApp().run()
 

@@ -6,6 +6,7 @@ from tennismarker import TennisMarker
 class TennisMapView(MapView):
     getting_tcs_timer = None
     tc_names = []
+    tcs = []
     def start_getting_tcs_in_fov(self):
         #After One second get tennis courts in field of view
         try:
@@ -19,7 +20,7 @@ class TennisMapView(MapView):
         min_lat, min_lon, max_lat, max_lon = self.get_bbox()
         app = App.get_running_app()
         sql_statement = "SELECT * FROM first name WHERE latitude > %s AND latitude < %s AND longitude > %s AND longitude < %s "%(min_lat, max_lat, min_lon, max_lon)
-        app.conn.cursor.execute(sql_statement)
+        app.cursor.execute(sql_statement)
         tcs = app.cursor.fetchall()
         print(tcs)
         for tc in tcs:
@@ -28,16 +29,8 @@ class TennisMapView(MapView):
                 continue
             else:
                 self.add_tc(tc)
-        return tcs
+                tcs.append(tc)
 
-    '''def give_access(self, *args):
-        min_lat, min_lon, max_lat, max_lon = self.get_bbox()
-        app = App.get_running_app()
-        sql_statement = "SELECT * FROM first name WHERE latitude > %s AND latitude < %s AND longitude > %s AND longitude < %s " % (
-        min_lat, max_lat, min_lon, max_lon)
-        app.cursor.execute(sql_statement)
-        tcs = app.cursor.fetchall()
-        return tcs'''
 
     def add_tc(self, tc):
         # Create TennisMarker
