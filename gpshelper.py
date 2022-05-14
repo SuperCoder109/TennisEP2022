@@ -28,7 +28,7 @@ class GpsHelper():
         #Configure GPS
         if platform == 'android' or platform == "ios":
             from plyer import gps
-            for tc in TennisMapView.get_tcs_in_fov(self).tcs:
+            for tc in tmv.give_access():
                 tennisc = tc
             gps.configure(on_location=self.update_blinker_position(),
                           on_status=self.on_auth_status,
