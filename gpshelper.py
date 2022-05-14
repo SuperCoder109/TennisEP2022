@@ -34,8 +34,9 @@ class GpsHelper():
             for tc in tlst:
                 tennisc = tc
             gps.configure(on_location=self.update_blinker_position(),
-                          on_status=self.on_auth_status,
-                          change_occupation_status=self.change_occupation_status(tennisc))
+                          on_status=self.on_auth_status
+                          #change_occupation_status=self.change_occupation_status()
+                          )
             gps.start(minTime=1000, minDistance=0)
 
 
@@ -56,7 +57,7 @@ class GpsHelper():
             self.has_centered_map = True
 
 
-    def change_occupation_status(self, tc, **kwargs):
+    '''def change_occupation_status(self, tc, **kwargs):
         my_lat = kwargs['lat']
         my_lon = kwargs['lon']
 
@@ -67,7 +68,7 @@ class GpsHelper():
         if ((my_lat <= (lat + 0.000164)) or (my_lat >= (lat - 0.000164))) and (
                 (my_lon <= (lon + 0.000108)) or (my_lon >= (lon - 0.000108))):
             occupation = "yes"
-            TennisMarker.source = 'ClosedMarker.png'
+            TennisMarker.source = 'ClosedMarker.png' '''
 
     def on_auth_status(self, general_status, status_message):
         if general_status == 'provider-enabled':
